@@ -1,0 +1,28 @@
+.testimonial-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	width: 100%;
+	background-color: white;
+	padding: 20px;
+	border-radius: 12px;
+}
+.testimonial-card > img {
+	height: 200px;
+	width: 200px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+.testimonial-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+}
+.testimonial-content > .testimonial-position,
+.testimonial-author {
+	font-weight: bold;
+}

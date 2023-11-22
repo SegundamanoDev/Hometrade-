@@ -1,0 +1,26 @@
+.faq-section {
+	max-width: 600px;
+	margin: 50px auto;
+	padding: 20px;
+	background-color: #fff;
+}
+.faqList {
+	list-style: none;
+	padding: 0;
+}
+.faqList > li {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+.faqList > li > label {
+	display: block;
+	font-weight: bold;
+	cursor: pointer;
+}
+.answer {
+	display: none;
+}
+.show {
+	display: block;
+}

@@ -1,67 +1,143 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./Header.css";
-import {routes} from "./routers";
-import {Link, NavLink} from "react-router-dom";
-import {Menu, Search} from "@mui/icons-material";
-import Sidebar from "./Sidebar";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 
 const Header = () => {
-	const [menu, setMenu] = useState(false);
-	const [searchBar, setSearchBar] = useState(false);
+	const [click, setClick] = useState(false);
+	const [show, setShow] = useState(false);
+	const [hideNav, setHideNav] = useState(false);
+	const [sideDropDown, setSideDropDown] = useState(false);
 
-	const hideMenu = () => setMenu(false);
-	const toggleMenu = () => setMenu(!menu);
-	const toggleSearch = () => setSearchBar(!searchBar);
+	const navigate = useNavigate();
 
-	const [search, setSearch] = useState("");
-
-	const handleSearch = (e) => {
-		e.preventDefault();
-		setSearch("");
+	const handleSideDrop = () => {
+		setSideDropDown(!sideDropDown);
 	};
+
+	const showDrop = () => {
+		setShow(true);
+	};
+	const hideDrop = () => {
+		setShow(false);
+	};
+
+	const handleClick = () => {
+		setClick(!click);
+		setSideDropDown(false);
+	};
+	const handleLogOut = async () => {
+		const result = await dispatch(logOut());
+		if (result) {
+			navigate("/");
+		}
+	};
+
+	// const handleNavHide = () => {
+	// 	if (window.scrollY > 100) {
+	// 		setHideNav(true);
+	// 	} else {
+	// 		if (window.scrollY < 10) {
+	// 			setHideNav(false);
+	// 		}
+	// 	}
+	// };
+
+	// useEffect(() => {
+	// 	window.addEventListener("scroll", handleNavHide);
+	// 	return () => {
+	// 		window.removeEventListener("scroll", handleNavHide);
+	// 	};
+	// }, []);
 	return (
-		<>
-			<header>
-				<div className='headers_container'>
-					<Sidebar menu={menu} click={hideMenu} />
-					<div className='logo'>
-						<h1>SHEGZY</h1>
-					</div>
-					<div className='nav_container'>
-						<ul>
-							{routes.map((route, index) => {
-								return (
-									<li key={index}>
-										<NavLink to={route.path} className={route.cName}>
-											{route.name}
-										</NavLink>
-									</li>
-								);
-							})}
-						</ul>
-						<div className='auth_container'>
-							<Link to='/signin'>SignIn</Link>
-							<Link to='/signup'>SignUp</Link>
-						</div>
-						<div className='search'>
-							<Search className='icon' onClick={toggleSearch} />
-						</div>
-					</div>
-					<div className='menu' onClick={toggleMenu}>
-						<Menu className='icon' />
-					</div>
+		<div className={hideNav ? "header_container hideNav" : "header_container"}>
+			<div className='header_wrapper'>
+				<div
+					className={click ? "overlay openOverlay" : "overlay"}
+					onClick={handleClick}></div>
+				<div className='logo'>
+					<h2>LOGO</h2>
 				</div>
-				<form onSubmit={handleSearch} className={searchBar ? "show" : ""}>
-					<input
-						type='search'
-						value={search}
-						onChange={(e) => setSearch(e.target.value)}
-						placeholder='Search'
-					/>
-					<button type='submit'>Search</button>
-				</form>
-			</header>
-		</>
+				<nav>
+					<ul>
+						<li>
+							<NavLink to='/'>Home</NavLink>
+						</li>
+						<li>
+							<NavLink to='/about'>About Us</NavLink>
+						</li>
+						<li>
+							<NavLink to='/services'>Service</NavLink>
+						</li>
+						<li>
+							<NavLink to='/mining-pool'>Mining Pools</NavLink>
+						</li>
+						<li>
+							<NavLink to='/contact'>Contact Us</NavLink>
+						</li>
+
+						<li>
+							<NavLink to='/admin'>Admin</NavLink>
+						</li>
+
+						<li>
+							<NavLink to='/register'>Sign Up</NavLink>
+						</li>
+						<li>
+							<NavLink to='/login'>Sign In</NavLink>
+						</li>
+					</ul>
+				</nav>
+				<div className='menuButton' onClick={handleClick}>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				{/* mini nav */}
+
+				<div className={click ? "miniNav openNav" : "miniNav"}>
+					<ul>
+						<li>
+							<NavLink to='/' onClick={handleClick}>
+								Home
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to='/about' onClick={handleClick}>
+								About Us
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to='/services' onClick={handleSideDrop}>
+								Services
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to='/mining-pool'>Mining Pools</NavLink>
+						</li>
+						<li>
+							<NavLink to='/contact' onClick={handleClick}>
+								Contact Us
+							</NavLink>
+						</li>
+
+						<li className='ad-ava' onClick={handleClick}>
+							<NavLink to='/admin'>Admin</NavLink>
+						</li>
+
+						<li>
+							<Link onClick={handleLogOut}>LogOut</Link>
+						</li>
+
+						<li onClick={handleClick}>
+							<NavLink to='/register'>Sign Up</NavLink>
+						</li>
+						<li onClick={handleClick}>
+							<NavLink to='/login'>Sign In</NavLink>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	);
 };
 

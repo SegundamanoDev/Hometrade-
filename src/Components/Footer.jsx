@@ -1,66 +1,89 @@
 import React from "react";
 import "./Footer.css";
 import {Link} from "react-router-dom";
-import {Facebook, Google, LinkedIn, Twitter} from "@mui/icons-material";
+import {Call, ChevronRight, PlaceRounded} from "@mui/icons-material";
+import {FacebookRounded, Instagram, Twitter} from "@mui/icons-material";
 
 const Footer = () => {
+	const startYear = 2008;
+	const currentYear = new Date().getFullYear();
 	return (
-		<>
-			<div className='footer_container'>
-				<div className='footer_top'>
-					<div className='left'>
-						<Link to='/services/courier'>Courier</Link>
-						<Link to='/services/logistics'>Logistics</Link>
-						<Link to='/services/e-commerce'>E-commerce</Link>
-						<Link to='/services/international'>International</Link>
-						<Link to='/services'>Ship Now</Link>
+		<div className='footer_container'>
+			<div className='footer_contents_wrapper'>
+				<div className='footer_lists'>
+					<div className='logo'>
+						<h2>LOGO</h2>
 					</div>
-					<div className='right'>
-						<Google className='icon' />
-						<Facebook className='icon' />
-						<LinkedIn className='icon' />
-						<Twitter className='icon' />
+					<p>
+						At HOMETRADE, we stand as pioneers in the world of Bitcoin mining,
+						fueled by a steadfast commitment to transparency, integrity, and
+						technological advancement. Our journey began with a vision to
+						redefine digital wealth, and today, our dedicated team of experts in
+						blockchain technology and financial markets works tirelessly to
+						provide you with a secure and reliable platform for cryptocurrency
+						mining.
+					</p>
+					<div className='readMore_link'>
+						<Link to='/about'>Read More</Link>
 					</div>
 				</div>
-				<div className='footer_bottom'>
-					<div className='left'>
-						<h3>SHEGZY INT SERVICE</h3>
-						<p>42 Concord Way off Airport Road, Ikeja, Lagos, Nigeria</p>
-						<button>GET LOCATION</button>
-					</div>
-					<div className='middle'>
-						<p>USEFUL LINKS</p>
-						<div className='links'>
-							<div className='link'>
-								<Link to=''>FAQ's</Link>
-								<Link to=''>Updates</Link>
-								<Link to=''>Agent</Link>
-								<Link to=''>Get Quote</Link>
-								<Link to=''>How To Ship</Link>
+
+				<div className='footer_lists'>
+					<p style={{fontWeight: "bold"}}>SITE PAGES</p>
+					<span>
+						<ChevronRight />
+						<Link to='/'>Home</Link>
+					</span>
+					<span>
+						<ChevronRight />
+						<Link to='/about'>About</Link>
+					</span>
+					<span>
+						<ChevronRight />
+						<Link to='/services'>Service</Link>
+					</span>
+					<span>
+						<ChevronRight />
+						<Link to='/mining-pool'>Mining Pool</Link>
+					</span>
+					<span>
+						<ChevronRight />
+						<Link to='/contact'>Contact Us</Link>
+					</span>
+				</div>
+				<div className='footer_lists'>
+					<p style={{fontWeight: "bold"}}>LOCATION</p>
+					<div className='footer_list'>
+						<span>
+							<PlaceRounded className='locations_icon' />
+							<div className='addrs'>
+								<p>Address:</p>
+								<p>Nashville, TN, USA</p>
 							</div>
-							<div className='link'>
-								<Link to=''>Calculator</Link>
-								<Link to=''>Team</Link>
-								<Link to=''>Open Account</Link>
-								<Link to=''>Partner</Link>
-								<Link to=''>Franchise</Link>
-							</div>
-						</div>
+						</span>
 					</div>
-					<div className='right'>
-						<p>SUBSCRIBE</p>
-						<p>
-							Don’t miss CourierPlus Nigeria latest news and events. Subscribe
-							to our newsletter channel and be informed
-						</p>
-						<form>
-							<input type='text' placeholder='Subscribe' />
-							<button type='submit'>Subscribe</button>
-						</form>
+					<div className='footer_list'>
+						<Call className='locations_icon' />
+						<span>
+							<div className='call_info'>
+								<p>Call Us</p>
+								<p>+44 20 8585 2096</p>
+							</div>
+						</span>
 					</div>
 				</div>
 			</div>
-		</>
+			<div className='footer_bottom'>
+				<div className='copyright'>
+					copyright &copy; HOMETRADE. {currentYear} All Right Reserved
+				</div>
+				<span className='media'>
+					<FacebookRounded className='icon' />
+					<Twitter className='icon' />
+					<Instagram className='icon' />
+				</span>
+			</div>
+		</div>
 	);
 };
 
