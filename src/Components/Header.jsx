@@ -4,22 +4,24 @@ import {Link, NavLink, useNavigate} from "react-router-dom";
 
 const Header = () => {
 	const [click, setClick] = useState(false);
-	const [show, setShow] = useState(false);
-	const [hideNav, setHideNav] = useState(false);
-	const [sideDropDown, setSideDropDown] = useState(false);
+	const [visible, setVisible] = useState(true);
+	const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+	const handleScrolling = () => {
+		currentScrollPos = window.scrollY;
+		const isScrollingUp = currentScrollPos < prevScrollPos;
+		setVisible(isScrollingUp || currentScrollPos < 10);
+		setPrevScrollPos(currentScrollPos);
+	};
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScrolling);
+		return () => {
+			window.removeEventListener("scroll", handleScrolling);
+		};
+	}, [prevScrollPos]);
 
 	const navigate = useNavigate();
-
-	const handleSideDrop = () => {
-		setSideDropDown(!sideDropDown);
-	};
-
-	const showDrop = () => {
-		setShow(true);
-	};
-	const hideDrop = () => {
-		setShow(false);
-	};
 
 	const handleClick = () => {
 		setClick(!click);
@@ -32,24 +34,8 @@ const Header = () => {
 		}
 	};
 
-	// const handleNavHide = () => {
-	// 	if (window.scrollY > 100) {
-	// 		setHideNav(true);
-	// 	} else {
-	// 		if (window.scrollY < 10) {
-	// 			setHideNav(false);
-	// 		}
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	window.addEventListener("scroll", handleNavHide);
-	// 	return () => {
-	// 		window.removeEventListener("scroll", handleNavHide);
-	// 	};
-	// }, []);
 	return (
-		<div className={hideNav ? "header_container hideNav" : "header_container"}>
+		<div className={visible ? "header_container hideNav" : "header_container"}>
 			<div className='header_wrapper'>
 				<div
 					className={click ? "overlay openOverlay" : "overlay"}
@@ -66,7 +52,7 @@ const Header = () => {
 							<NavLink to='/about'>About Us</NavLink>
 						</li>
 						<li>
-							<NavLink to='/services'>Service</NavLink>
+							<NavLink to='/service'>Service</NavLink>
 						</li>
 						<li>
 							<NavLink to='/mining-pool'>Mining Pools</NavLink>
@@ -107,9 +93,7 @@ const Header = () => {
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to='/services' onClick={handleSideDrop}>
-								Services
-							</NavLink>
+							<NavLink to='/services'>Services</NavLink>
 						</li>
 						<li>
 							<NavLink to='/mining-pool'>Mining Pools</NavLink>

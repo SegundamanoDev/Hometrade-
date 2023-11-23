@@ -9,6 +9,11 @@ import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import About from "./Components/About";
+import Service from "./Components/Service";
+import Miningpool from "./Components/Miningpool";
+import Contact from "./Components/Contact";
+import Register from "./Components/Register";
 
 const App = () => {
 	useEffect(() => {
@@ -27,6 +32,11 @@ const App = () => {
 				<Header />
 				<Routes>
 					<Route exact path='/' element={<Home />} />
+					<Route path='/about' element={<About />} />
+					<Route path='/service' element={<Service />} />
+					<Route path='/mining-pool' element={<Miningpool />} />
+					<Route path='/contact' element={<Contact />} />
+					<Route path='/register' element={<Register />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>

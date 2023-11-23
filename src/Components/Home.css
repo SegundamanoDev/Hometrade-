@@ -34,7 +34,18 @@
 	text-align: center;
 	width: 100%;
 }
-
+.coin-table {
+	display: flex;
+	width: 100%;
+	white-space: nowrap;
+	align-items: center;
+	overflow-x: scroll;
+	scroll-snap-type: x mandatory;
+	background-color: black;
+}
+.coin-table::-webkit-scrollbar {
+	display: none;
+}
 .hero-content {
 	max-width: 800px; /* Adjust the width based on your design preferences */
 }
@@ -102,4 +113,34 @@
 .achievement-section > img {
 	width: 100%;
 	object-fit: cover;
+}
+.how-to-invest {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: 1rem;
+	width: 100%;
+}
+.earning-step-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	width: 100%;
+	gap: 1rem;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+}
+.earning-step-container > .step {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: 1rem;
+	width: 100%;
+	background-color: white;
+	padding: 15px;
+	border-radius: 10px;
 }

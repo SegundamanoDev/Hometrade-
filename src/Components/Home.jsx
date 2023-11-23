@@ -1,13 +1,27 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./Home.css";
 import TestimonialCard from "./TestimonialCard";
 import test from "../assets/WhatsApp Image 2023-11-20 at 23.25.11_2e29484d.jpg";
 import Faq from "./Faq";
+import axios from "axios";
 import PlanCard from "./PlanCard";
 import minMachine from "../assets/WhatsApp Image 2023-11-20 at 23.25.11_f81b14e6.jpg";
 import achivmnt from "../assets/WhatsApp Image 2023-11-22 at 00.56.22_3e566a7e.jpg";
+import Coin from "./Coin";
 
 const Home = () => {
+	const [coins, setCoins] = useState([]);
+	useEffect(() => {
+		axios
+			.get(
+				"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+			)
+			.then((res) => {
+				setCoins(res.data);
+				console.log(res.data);
+			})
+			.catch((error) => console.log(error));
+	}, []);
 	return (
 		<div className='home-section'>
 			<div className='hero-section'>
@@ -25,6 +39,60 @@ const Home = () => {
 					</p>
 					<button>Get Started</button>
 				</div>
+			</div>
+			<div className='coin-table'>
+				{coins.map((coin) => (
+					<Coin
+						key={coin.id}
+						name={coin.name}
+						image={coin.image}
+						symbol={coin.symbol}
+						marketcap={coin.market_cap}
+						price={coin.current_price}
+						priceChange={coin.price_change_percentage_24h}
+						volume={coin.total_volume}
+					/>
+				))}
+			</div>
+			<div className='how-to-invest'>
+				<h2>THREE EASY STEPS TO START EARNING</h2>
+				<div className='earning-step-container'>
+					<div className='step'>
+						<h3>Create Your Account</h3>
+						<p style={{padding: "10px"}}>
+							Begin your journey by creating a secure account on our
+							user-friendly platform. Your privacy and security are our top
+							priorities. By providing essential details, you open the door to
+							our world of lucrative opportunities
+						</p>
+					</div>
+					<div className='step'>
+						<h3>Make a Deposit</h3>
+						<p>
+							Once your account is set up, take the next step toward financial
+							prosperity by making a deposit. choose from a range flexible
+							deposit options tailored to suit your preferences. our transparent
+							and secure transaction process ensures your funds are handled with
+							the utmost care
+						</p>
+					</div>
+					<div className='step'>
+						<h3>Experience Financial Growth</h3>
+						<p>
+							With your account funded. your're set to experience the remarkable
+							potential of Bitcoin Mining. our cutting-edge mining technology,
+							coupled with a team of experts, maximizes your returns. witness
+							the steady growth of your investment as we navigate the dynamic
+							landscape of the cryptocurrency market
+						</p>
+					</div>
+				</div>
+				<p>
+					At HOMETRADE, we're not just offering a service; we're providing a
+					pathway to financial empowerment. join us today and unlock the true
+					potential of your investments in the world of Bitcoin Mining. Your
+					journey to financial success begins here.
+				</p>
 			</div>
 			<div className='about-section' data-aos='fade-up'>
 				<div className='about-content'>
