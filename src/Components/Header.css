@@ -10,10 +10,6 @@
 	width: 100%;
 	z-index: 999;
 	transition: 0.3s ease;
-	transform: translateY(0);
-}
-.header_container.hideNav {
-	transform: translateY(-100%);
 }
 .header_container > .header_wrapper {
 	display: flex;
